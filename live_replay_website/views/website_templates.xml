@@ -1,0 +1,63 @@
+<odoo>
+  <template id="home_customize" inherit_id="website.homepage" name="Home Custom Replay">
+    <xpath expr="//div[@id='wrap']" position="inside">
+      <!-- SECTION REDIFFUSIONS DE LIVES -->
+       <style>
+        .hover-shadow:hover {
+          box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.2);
+          transform: translateY(-5px);
+          transition: all 0.3s ease-in-out;
+          }
+
+       </style>
+<section class="py-5" style="background-color: #f8f9fa;">
+  <div class="container-fluid px-lg-5 px-4">
+    <h2 class="text-center mb-5 display-5 fw-bold text-dark">Nos dernières rediffusions</h2>
+
+    <t t-set="replays" t-value="request.env['live.replay'].sudo().search([], order='date desc', limit=4)"/>
+
+    <div class="row justify-content-center gx-5 gy-4">
+      <t t-foreach="replays" t-as="replay">
+        <div class="col-md-6">
+          <div class="card h-100 shadow-lg border-0 rounded-4 overflow-hidden hover-shadow">
+
+            <t t-if="replay.image">
+              <img t-att-src="'/web/image/live.replay/%s/image' % replay.id"
+                   class="card-img-top"
+                   style="height: 180px; object-fit: cover;"/>
+            </t>
+            <t t-else=""><iframe src="" ></iframe>
+              <div class="ratio ratio-16x9">
+                <iframe t-att-src="replay.embed_url"
+                        width="267" height="476" style="border:none;overflow:hidden" 
+                        scrolling="no" frameborder="0" 
+                        allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" 
+                        allowFullScreen="true">
+                </iframe>
+              </div>
+            </t>
+
+            <div class="card-body text-center py-3">
+              <h5 class="card-title fw-semibold mb-2"><t t-esc="replay.name"/></h5>
+              <p class="card-text text-muted mb-2"><small><t t-esc="replay.date.strftime('%d/%m/%Y')"/></small></p>
+              <div class="d-flex justify-content-center gap-2">
+                <a t-att-href="'/replay/%s' % replay.id" class="btn btn-primary btn-sm">Voir la rediffusion</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </t>
+    </div>
+
+    <t t-if="not replays">
+      <p class="text-muted text-center mt-4">Aucune rediffusion pour le moment.</p>
+    </t>
+  </div>
+</section>
+
+
+
+    </xpath>
+  </template>
+</odoo>

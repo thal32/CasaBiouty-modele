@@ -1,0 +1,38 @@
+<odoo>
+    <record id="view_image_clothing_matcher_form" model="ir.ui.view">
+        <field name="name">image.yolov8.image.matcher.form</field>
+        <field name="model">image.yolov8.image.matcher</field>
+        <field name="arch" type="xml">
+            <form string="Comparateur de vêtements">
+                <sheet>
+                    <group>
+                        <field name="name" placeholder="Nom de la comparaison"/>
+                        <field name="image_1" widget="image" class="oe_avatar"
+                               options="{'preview_image': 'image_1'}" style="max-width: 200px; max-height: 200px;"/>
+                        <field name="similarity_score" readonly="1"/>
+                        <field name="similarity_display" readonly="1" widget="html"/>
+                    </group>
+                    <group string="Produits similaires trouvés">
+                        <div style="overflow-x:auto; width: 100%;">
+                            <div style="min-width: 1000px;">
+                                <field name="matched_product_line_ids" nolabel="1">
+                                    <tree editable="false" string="Produits similaires">
+                                        <field name="product_image" widget="image" options="{'size': [64, 64]}" />
+                                        <field name="product_name"/>
+                                        <field name="clip_similarity_score" string="Similarité (%)"/>
+                                    </tree>
+                                </field>
+                            </div>
+                        </div>
+                    </group>
+
+                    <group>
+                        <button name="compare_with_products"
+                                string="Comparer avec les produits"
+                                type="object" class="btn-primary"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

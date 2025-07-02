@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <template id="website_live_replay" name="Live Replay Website">
+    <t t-call="website.layout">
+      <t t-set="has_wishlist" t-value="'website_sale.wishlist' in request.env"/>
+      <section class="py-5" style="background-color: #f8f9fa;">
+        <div class="container-fluid px-lg-5 px-4">
+          <h2 class="text-center mb-5 display-5 fw-bold text-dark">Nos dernières rediffusions</h2>
+
+          <t t-set="replays" t-value="request.env['live.replay'].sudo().search([], order='date desc', limit=4)"/>
+          <t t-if="has_wishlist">
+            <t t-set="products_in_wishlist" t-value="request.env['website_sale.wishlist'].sudo().get_products()"/>
+          </t>
+
+          <div class="d-flex flex-column gap-5">
+            <t t-foreach="replays" t-as="replay">
+              <div class="live-replay-card d-lg-flex gap-4 shadow-sm rounded p-3 bg-white">
+
+                <!-- Vidéo -->
+                <div class="live-replay-video flex-shrink-0" style="min-width: 500px; max-width: 100%;">
+                  <t t-if="replay.image">
+                    <img t-att-src="'/web/image/live.replay/%s/image' % replay.id"
+                         alt="Replay image"
+                         class="img-fluid rounded w-100" style="max-height: 360px; object-fit: cover;"/>
+                  </t>
+                  <t t-else="">
+                    <iframe t-att-src="replay.embed_url"
+                            allowfullscreen="true"
+                            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                            scrolling="no" frameborder="0"
+                            style="height: 360px; width: 100%; border-radius: 8px;">
+                    </iframe>
+                  </t>
+                </div>
+
+                <!-- Infos + Produits -->
+                <div class="live-replay-info mt-3 mt-lg-0 flex-grow-1">
+                  <h5 class="fw-semibold"><t t-esc="replay.name"/></h5>
+                  <p class="date text-muted mb-3"><t t-esc="replay.date.strftime('%d/%m/%Y')"/></p>
+
+                  <div class="live-replay-products">
+                    <t t-if="replay.product_ids">
+                      <!-- Dropdown avec images -->
+                      <div class="dropdown mb-3">
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Produits associés
+                        </button>
+                        <ul class="dropdown-menu p-2" style="min-width: 320px;">
+                          <t t-foreach="replay.product_ids" t-as="product">
+                            <t t-if="product and product._name == 'product.template'">
+                              <li class="d-flex align-items-center mb-2">
+                                <a href="javascript:void(0)" class="d-flex align-items-center text-decoration-none text-dark w-100"
+                                   data-bs-toggle="modal" t-att-data-bs-target="'#productModal_%s' % product.id">
+                                  <img t-att-src="'/web/image/product.template/%s/image_128' % product.id"
+                                       alt="product.name" width="64" height="64"
+                                       class="me-3 rounded shadow-sm" style="object-fit: cover;"/>
+                                  <span><t t-esc="product.name"/></span>
+                                </a>
+                              </li>
+                            </t>
+                          </t>
+                        </ul>
+                      </div>
+
+                      <!-- Wishlist -->
+                      <t t-if="has_wishlist">
+                        <div class="mt-2 d-flex flex-wrap gap-2">
+                          <t t-foreach="replay.product_ids" t-as="product">
+                            <t t-if="product and product._name == 'product.template'">
+                              <t t-set="variant_id" t-value="product._get_first_possible_variant_id()"/>
+                              <t t-set="variant" t-value="variant_id and request.env['product.product'].browse(variant_id) or False"/>
+                              <t t-set="in_wish" t-value="product in products_in_wishlist"/>
+                              <t t-if="variant">
+                                <button
+                                  type="button"
+                                  class="btn btn-outline-primary btn-sm o_add_wishlist"
+                                  t-att-disabled="in_wish or None"
+                                  title="Ajouter à la Wishlist"
+                                  t-att-data-product-template-id="product.id"
+                                  t-att-data-product-product-id="variant.id"
+                                  data-action="o_wishlist">
+                                  <span class="fa fa-heart me-1" role="img" aria-label="Add to wishlist"/>
+                                  <t t-if="in_wish">Déjà en wishlist</t>
+                                  <t t-else="">Ajouter à la wishlist</t>
+                                </button>
+                              </t>
+                            </t>
+                          </t>
+                        </div>
+                      </t>
+                    </t>
+                    <t t-if="not replay.product_ids">
+                      <p class="text-muted">Aucun produit associé.</p>
+                    </t>
+                  </div>
+                </div>
+              </div>
+            </t>
+          </div>
+
+          <t t-if="not replays">
+            <p class="text-muted text-center mt-4">Aucune rediffusion pour le moment.</p>
+          </t>
+        </div>
+      </section>
+
+      <!-- Modales produits -->
+      <t t-foreach="replays" t-as="replay">
+        <t t-foreach="replay.product_ids" t-as="product">
+          <t t-if="product and product._name == 'product.template'">
+            <t t-set="variant_id" t-value="product._get_first_possible_variant_id()"/>
+            <t t-set="variant" t-value="variant_id and request.env['product.product'].browse(variant_id) or False"/>
+            <div class="modal fade" t-att-id="'productModal_%s' % product.id" tabindex="-1" aria-hidden="true">
+              <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title"><t t-esc="product.name"/></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                  </div>
+                  <div class="modal-body d-flex flex-column flex-lg-row gap-4">
+                    <img t-att-src="'/web/image/product.template/%s/image_1920' % product.id"
+                         class="img-fluid rounded" style="max-width: 300px;" alt="Image produit"/>
+                    <div>
+                      <p class="fw-semibold">Prix :</p>
+                      <t t-if="variant">
+                        <p><t t-esc="variant.lst_price"/> <t t-esc="variant.currency_id.symbol"/></p>
+                      </t>
+                      <p class="fw-semibold mt-3">Description :</p>
+                      <p><t t-raw="product.website_description or 'Pas de description disponible.'"/></p>
+
+                      <div class="mt-4 d-flex gap-3">
+                        <a t-att-href="product.website_url" class="btn btn-outline-secondary">Voir la fiche</a>
+                        <t t-if="variant">
+                          <form t-att-action="'/shop/cart/update'" method="POST" class="o_add_to_cart">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"
+                                   t-nocache="The csrf token must always be up to date."/>
+                            <input type="hidden" name="product_id" t-att-value="variant.id"/>
+                            <input type="hidden" name="add_qty" value="1"/>
+                            <button type="submit" class="btn btn-primary">Ajouter au panier</button>
+                          </form>
+                        </t>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </t>
+        </t>
+      </t>
+    </t>
+  </template>
+
+  <!-- Page live replay -->
+  <record id="replay_live_page" model="website.page">
+    <field name="name">Live replay</field>
+    <field name="url">/live-shopping</field>
+    <field name="website_published">True</field>
+    <field name="view_id" ref="website_live_replay"/>
+  </record>
+</odoo>

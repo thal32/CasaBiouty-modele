@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <template id="custom_portal_home_extension" inherit_id="portal.portal_my_home">
+        <xpath expr="//div[contains(@class, 'o_portal_my_home')]" position="before">
+            <t t-set="partner" t-value="request.env.user.partner_id"/>
+            
+            <style>
+                @media (min-width: 992px) {
+                .d-lg-flex.col-lg-4 {
+                    display: none !important;
+                }
+                .o_portal_my_home .col-lg-8 {
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    flex: 0 0 100% !important;
+
+                }
+            }
+                @media (min-width: 992px) {
+            
+                a[title="Vos commandes"].d-flex {
+                    display: none !important;
+                }
+
+               
+                a[title="Nos commandes"].d-flex {
+                    display: none !important;
+                }
+
+               
+                a[title="Vos factures"].d-flex {
+                    display: none !important;
+                }
+
+                a[title='Connexion &amp; Sécurité'].d-flex {
+                    display: none !important;
+                }
+
+            }
+
+            
+
+            dashboard-header {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                margin-bottom: 1rem;
+            }
+            .dashboard-header img {
+                border-radius: 50%;
+                border: 2px solid #ccc;
+                width: 60px;
+                height: 60px;
+                object-fit: cover;
+            }
+
+
+            .logout-container {
+                text-align: left; 
+                margin-top: 2rem;
+            }
+
+            .btn-ghost {
+                background: transparent;
+                border: 1px solid #666; 
+                color: #666;
+                padding: 0.4rem 1rem;
+                border-radius: 4px;
+                font-weight: 500;
+                transition: all 0.3s ease;
+                text-decoration: none;
+                display: inline-block;
+            }
+
+            .btn-ghost:hover {
+                background: #666;
+                color: white;
+                border-color: #666;
+                text-decoration: none;
+            }
+
+
+
+
+            </style>
+
+            <div class="container my-4">
+                <div class="card shadow rounded-3 p-4 mb-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="dashboard-header">                    
+                    <img t-if="partner.image_1920" t-attf-src="data:image/*;base64, {{partner.image_1920}}" alt="Photo de profil"/>
+                    <h2 class="mb-0">Bonjour <strong><t t-esc="partner.name"/></strong> 👋</h2>
+                </div>
+                    </div>  
+                    <p class="mb-0">Statut : <strong><t t-esc="partner.function or 'Coupine fidele'"/></strong></p>
+                    <p class="mb-0">Points de fidélité : <strong>250</strong> ⭐</p>
+                </div>
+            </div>
+            <div class="container my-5">
+                <div class="card p-4 shadow-sm rounded-4 border-0">
+                    <h3 class="mb-4">Vos informations personnelles</h3>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <strong>Nom :</strong>
+                            <p class="mb-0"><t t-esc="request.env.user.partner_id.name"/></p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <strong>Email :</strong>
+                            <p class="mb-0"><t t-esc="request.env.user.partner_id.email"/></p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <strong>Téléphone :</strong>
+                            <p class="mb-0"><t t-esc="request.env.user.partner_id.phone or 'Non renseigné'"/></p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <strong>Adresse :</strong>
+                            <p class="mb-0"><t t-esc="request.env.user.partner_id.contact_address or 'Non renseignée'"/></p>
+                        </div>
+                    </div>
+                    <a href="/my/account" class="btn btn-outline-primary" style="width: fit-content;">
+                        Modifier mes informations
+                    </a>
+                </div>
+            </div>
+            <div class="container my-5">
+                <div class="card p-4 shadow-sm rounded-4 border-0">
+                    <h3 class="mb-4">Vos commandes</h3>
+                    <p>Consultez l’historique de vos commandes passées sur notre boutique.</p>
+                    <a href="/my/orders" class="btn btn-outline-primary" style="width: fit-content;">
+                        Voir mes commandes
+                    </a>
+                </div>
+            </div>
+            <div class="logout-container">
+                    <a href="/web/session/logout" class="btn btn-ghost logout-btn">Déconnexion</a>
+            </div>
+        </xpath>
+    </template>
+</odoo>

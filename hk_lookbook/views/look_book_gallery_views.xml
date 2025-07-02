@@ -1,0 +1,41 @@
+<odoo>
+<record id="view_look_book_gallery_form" model="ir.ui.view">
+    <field name="name">look.book.gallery.form</field>
+    <field name="model">look.book.gallery</field>
+    <field name="arch" type="xml">
+      <form string="Galerie Look Book">
+        <sheet>
+          <group>
+            <field name="theme_id"/>
+            <field name="name"/>
+            <field name="description"/> 
+            <field name="image" widget="image"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="view_look_book_gallery_tree" model="ir.ui.view">
+    <field name="name">look.book.gallery.tree</field>
+    <field name="model">look.book.gallery</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name"/>
+        <field name="theme_id"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="action_look_book_gallery" model="ir.actions.act_window">
+    <field name="name">Galeries</field>
+    <field name="res_model">look.book.gallery</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+    <menuitem id="menu_look_book_gallery"
+            name="Galeries"
+            parent="menu_look_book_root"
+            action="action_look_book_gallery"
+            sequence="2"/>
+</odoo>

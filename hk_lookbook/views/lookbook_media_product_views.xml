@@ -1,0 +1,55 @@
+<odoo>
+  <!-- Formulaire d'une photo -->
+  <record id="view_look_book_media_form" model="ir.ui.view">
+    <field name="name">look.book.media.form</field>
+    <field name="model">look.book.media</field>
+    <field name="arch" type="xml">
+      <form string="Média Look Book">
+        <sheet>
+          <group>
+            <field name="name"/>
+            <field name="gallery_id"/>
+            <field name="image" widget="image"/>
+            <field name="description"/>
+          </group>
+
+          <notebook>
+            <page string="Produits associés">
+              <field name="product_ids">
+                <tree editable="bottom">
+                  <field name="product_id"/>
+                  <field name="label"/>
+                  <field name="description"/>
+                </tree>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- Liste des photos -->
+  <record id="view_look_book_media_tree" model="ir.ui.view">
+    <field name="name">look.book.media.tree</field>
+    <field name="model">look.book.media</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name"/>
+        <field name="gallery_id"/>
+      </tree>
+    </field>
+  </record>
+
+  <!-- Action et menu -->
+  <record id="action_look_book_media" model="ir.actions.act_window">
+    <field name="name">Photos Look Book</field>
+    <field name="res_model">look.book.media</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <menuitem id="menu_look_book_media"
+            name="Photos"
+            parent="menu_look_book_root"
+            action="action_look_book_media"/>
+</odoo>

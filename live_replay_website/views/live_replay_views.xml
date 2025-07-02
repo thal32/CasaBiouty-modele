@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <!-- Vue Formulaire -->
+  <record id="view_live_replay_form" model="ir.ui.view">
+    <field name="name">live.replay.form</field>
+    <field name="model">live.replay</field>
+    <field name="arch" type="xml">
+      <form string="Rediffusion Live">
+        <sheet>
+          <group>
+            <field name="name"/>
+            <field name="slug"/>
+            <field name="date"/>
+            <field name="video_url"/>
+            <field name="product_ids" widget="many2many_tags"/>
+            <field name="image" widget="image" class="oe_avatar"/>
+           
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- Vue Liste -->
+  <record id="view_live_replay_tree" model="ir.ui.view">
+    <field name="name">live.replay.tree</field>
+    <field name="model">live.replay</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name"/>
+        <field name="date"/>
+        <field name="video_url"/>
+        <field name="slug"/>
+        <field name="image" widget="image" options="{'size': [40, 40]}"/>
+       
+      </tree>
+    </field>
+  </record>
+
+  <!-- Vue Recherche -->
+  <record id="view_live_replay_search" model="ir.ui.view">
+    <field name="name">live.replay.search</field>
+    <field name="model">live.replay</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="name"/>
+        <field name="date"/>
+        <field name="slug"/>
+      </search>
+    </field>
+  </record>
+
+  <!-- Action principale -->
+  <record id="action_live_replay" model="ir.actions.act_window">
+    <field name="name">Rediffusions</field>
+    <field name="res_model">live.replay</field>
+    <field name="view_mode">tree,form</field>
+    <field name="search_view_id" ref="view_live_replay_search"/>
+  </record>
+
+  <!-- Menus -->
+  <menuitem id="menu_live_replay_root" name="Lives" sequence="10"/>
+  <menuitem id="menu_live_replay" name="Rediffusions" parent="menu_live_replay_root" action="action_live_replay" sequence="20"/>
+</odoo>

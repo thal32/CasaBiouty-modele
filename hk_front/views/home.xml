@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="home_customize" inherit_id="website.homepage" name="Home" active="True">
+    <xpath expr="//div[@id='wrap']" position="replace">
+      <div id="wrap" class="oe_structure oe_empty">
+        <section class="s_carousel_wrapper" data-vxml="001" data-snippet="s_carousel" data-name="Carrousel">
+          <div class="s_carousel s_carousel_default carousel slide pointer-event" data-bs-interval="10000"
+               id="myCarousel1737737915683" style="background-image: none;">
+            <ol class="carousel-indicators o_we_no_overlay">
+              <li data-bs-target="#myCarousel1737737915683" data-bs-slide-to="0" class="active" aria-current="true"/>
+              <li data-bs-target="#myCarousel1737737915683" data-bs-slide-to="1"/>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item o_colored_level pt192 pb208 oe_img_bg o_bg_img_center active"
+                   style="background-image: url(/hk_front/static/src/img/slide-1.png);" data-name="Slide">
+                <div class="o_we_bg_filter"
+                     style="background-image: linear-gradient(135deg, rgba(242, 201, 76, 0.5) 0%, rgba(254, 0, 155, 0.63) 100%);"/>
+                <div class="oe_unremovable container">
+                  <div class="row">
+                    <div class="carousel-content o_colored_level pt0 col-lg-6">
+                      <h1>
+                        Casa &amp;amp; Biouty
+                      </h1>
+                      <p>Hetsika sy Ketrika - Shop &amp;amp; Live Shopping Studio<br/>Studio photo et Plateau de
+                        tournage de télé-achat.
+                      </p>
+                      <p class="text-center" style="width:50%">
+                        <a class="btn btn-primary mx-4" href="/shop" data-bs-original-title="" title="">BOUTIQUE</a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="carousel-item o_colored_level pt192 pb208 oe_img_bg o_bg_img_center"
+                   data-name="Slide">
+                <div class="o_we_bg_filter"
+                     style="background-image: linear-gradient(135deg, rgba(242, 201, 76, 0.5) 0%, rgba(254, 0, 155, 0.63) 100%);"/>
+                <div class="oe_unremovable container">
+                  <div class="row">
+                    <div class="carousel-content o_colored_level pt0 col-lg-6 o_draggable">
+                      <h1>
+                        CASA &amp;amp; BIOUTY
+                      </h1>
+                      <p>Hetsika sy Ketrika - Shop &amp;amp; Live Shopping Studio<br/>Studio photo et Plateau de
+                        tournage de télé-achat.
+                      </p>
+                      <p class="text-center" style="width:50%">
+                        <a class="btn btn-primary mx-4" href="/live-shopping" data-bs-original-title="" title="">Live Shopping</a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <a class="carousel-control-prev o_not_editable o_we_no_overlay" role="img" aria-label="Précédent"
+               title="Précédent" href="#myCarousel1737737915683" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"/>
+              <span class="visually-hidden o_default_snippet_text">Précédent</span>
+            </a>
+            <a class="carousel-control-next o_not_editable o_we_no_overlay" role="img" aria-label="Suivant"
+               title="Suivant" href="#myCarousel1737737915683" data-bs-slide="next">
+              <span class="carousel-control-next-icon"/>
+              <span class="visually-hidden o_default_snippet_text">Suivant</span>
+            </a> -->
+          </div>
+        </section>
+
+
+        <section class="category_block pt72 pb72 o_colored_level" data-snippet="s_references" data-name="Références"
+                 style="background-image: none;">
+          <div class="container">
+            <h2 style="text-align: center;">
+              Nos catégories
+            </h2>
+            <p style="text-align: center;">
+              Lorem ipsum dolor sit amet
+            </p>
+            <div class="row content-category">
+              <div class="col-lg-2 pt16 pb16 o_colored_level">
+                <a href="#">
+                  <img src="\hk_front\static\src\img\robe-longue-et-forme-noire.png" class="img img-fluid mx-auto p-4" alt=""/>
+                  Femme
+                </a>
+              </div>
+              <div class="col-lg-2 pt16 pb16 o_colored_level">
+                <a href="#">
+                  <img src="/hk_front/static/src/img/ensemble-costume-et-cravate.png" class="img img-fluid mx-auto p-4" alt=""/>
+                  Homme
+                </a>
+              </div>
+              <div class="col-lg-2 pt16 pb16 o_colored_level">
+                <a href="#">
+                  <img src="/hk_front/static/src/img/vetements-de-bebe.png" class="img img-fluid mx-auto p-4" alt=""/>
+                  Enfants
+                </a>
+              </div>
+              <div class="col-lg-2 pt16 pb16 o_colored_level">
+                <a href="#">
+                  <img src="/hk_front/static/src/img/sacIco.png" class="img img-fluid mx-auto p-4" alt=""/>
+                  Accessoires
+                </a>
+              </div>
+              
+              <div class="col-lg-2 pt16 pb16 o_colored_level">
+                <a href="#">
+                  <img src="/hk_front/static/src/img/bagueIco.png" class="img img-fluid mx-auto p-4" alt=""/>
+                  Bijoux
+                </a>
+              </div>
+              
+              <div class="col-lg-2 pt16 pb16 o_colored_level">
+                <a href="#">
+                  <img src="/hk_front/static/src/img/skincare.png" class="img img-fluid mx-auto p-4" alt=""/>
+                  Cosmetiques
+                </a>
+              </div>
+              
+              
+              
+            </div>
+          </div>
+        </section>
+        <section class="pt48 o_colored_level" style="background-color: #f39ca2;">
+          <div class="container">
+            <h2 style="text-align: center;">
+              Best sellers
+              <br/>
+            </h2>
+            <p style="text-align: center;">
+              Lorem ipsum dolor sit amet
+            </p>
+          </div>
+        </section>
+        <section data-snippet="s_dynamic_snippet_carousel"
+                 class="s_dynamic_snippet_carousel s_dynamic pt16 pb72 o_colored_level s_product_product_view_detail o_dynamic_empty"
+                 data-name="Carrousel dynamique" data-number-of-records="6" data-filter-id="1"
+                 data-template-key="website_sale.dynamic_filter_template_product_product_view_detail"
+                 data-carousel-interval="5000" style="background-color: #f39ca2;" data-number-of-elements="3">
+          <div class="container o_not_editable">
+            <div class="dynamic_snippet_template"/>
+          </div>
+        </section>
+        <section class="s_text_image pt72 pb32 o_colored_level" data-snippet="s_text_image" data-name="Texte - Image"
+                 style="background-image: none;">
+          <div class="container">
+            <div class="row align-items-center">
+              <div class="pt16 pb16 o_colored_level col-lg-8">
+                <h2>
+                  Nouveauté
+                </h2>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad doloribus et, facere inventore ipsum iure
+                  similique. Corporis eaque illum laboriosam, minus nam quis.
+                </p>
+                <section data-snippet="s_dynamic_snippet_carousel"
+                         class="new_products s_dynamic_snippet_carousel s_dynamic pt32 pb32 o_colored_level s_product_product_borderless_1 o_dynamic_empty"
+                         data-name="Carrousel dynamique" data-number-of-records="6" data-filter-id="1"
+                         data-template-key="website_sale.dynamic_filter_template_product_product_borderless_1"
+                         data-carousel-interval="5000">
+                  <div class="container o_not_editable">
+                    <div class="css_non_editable_mode_hidden">
+                      <div class="missing_option_warning alert alert-info rounded-0 fade show d-none d-print-none o_default_snippet_text">
+                        Votre snippet dynamique sera affiché ici... Ce message est affiché parce que vous n'avez pas
+                        défini le
+                        filtre et le modèle à utiliser.
+                        <br/>
+                      </div>
+                    </div>
+                    <div class="dynamic_snippet_template"/>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="s_features_grid o_colored_level pb0 pt16 mt64" data-snippet="s_features_grid"
+                 data-name="Grille de fonctionnalités"
+                 style="background-color: rgb(183, 211, 217); background-image: none;">
+          <div class="container">
+            <div class="row">
+              <div class="s_col_no_bgcolor pb24 col-lg-12">
+                <div class="row">
+                  <div class="pt16 pb16 o_colored_level col-lg-3" data-name="Box">
+                    <i class="fa fa-truck fa-2x rounded-circle bg-o-color-1 s_features_grid_icon"/>
+                    <div class="s_features_grid_content">
+                      <h4>
+                        Livraison
+                      </h4>
+                      <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="pt16 pb16 o_colored_level col-lg-3" data-name="Box">
+                    <i class="fa fa-life-bouy fa-2x rounded-circle bg-o-color-1 s_features_grid_icon"/>
+                    <div class="s_features_grid_content">
+                      <h4>
+                        Ouverture
+                      </h4>
+                      <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="pt16 pb16 o_colored_level col-lg-3" data-name="Box">
+                    <i class="fa fa-rotate-left fa-2x rounded-circle bg-o-color-1 s_features_grid_icon"/>
+                    <div class="s_features_grid_content">
+                      <h4>
+                        Produits de marque
+                      </h4>
+                      <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="pt16 pb16 o_colored_level col-lg-3" data-name="Box">
+                    <i class="fa fa-cart-plus fa-2x rounded-circle bg-o-color-1 s_features_grid_icon"/>
+                    <div class="s_features_grid_content">
+                      <h4>
+                        mobile money
+                      </h4>
+                      <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="s_references pt64 pb64 o_colored_level" data-snippet="s_references" data-name="Références"
+                 style="background-image: none;">
+          <div class="container">
+            <h2 style="text-align: center;">Nos marques</h2>
+            <p style="text-align: center;" class="o_default_snippet_text">Lorem ipsum dolor sit amet</p>
+            <div class="row">
+              <div class="col-lg-2 pt16 pb16 o_colored_level">
+                <img src="/web/image/website.s_reference_demo_image_1" class="img img-fluid mx-auto"/>
+              </div>
+              <div class="col-lg-2 pt16 pb16 o_colored_level">
+                <img src="/web/image/website.s_reference_demo_image_2" class="img img-fluid mx-auto"/>
+              </div>
+              <div class="col-lg-2 pt16 pb16 o_colored_level">
+                <img src="/web/image/website.s_reference_demo_image_3" class="img img-fluid mx-auto"/>
+              </div>
+              <div class="col-lg-2 pt16 pb16 o_colored_level">
+                <img src="/web/image/website.s_reference_demo_image_4" class="img img-fluid mx-auto"/>
+              </div>
+              <div class="col-lg-2 pt16 pb16 o_colored_level">
+                <img src="/web/image/website.s_reference_demo_image_5" class="img img-fluid mx-auto"/>
+              </div>
+              <div class="col-lg-2 pt16 pb16 o_colored_level">
+                <img src="/web/image/website.s_reference_default_image_6" class="img img-fluid mx-auto"/>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </xpath>
+  </template>
+
+</odoo>

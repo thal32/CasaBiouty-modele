@@ -1,0 +1,65 @@
+.hover-shadow:hover {
+    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+    transition: all 0.3s ease-in-out;
+        }
+
+
+ .live-replay-card {
+          display: flex;
+          flex-direction: row;
+          background: white;
+          border-radius: 12px;
+          box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+          overflow: hidden;
+          height: 280px;
+        }
+        .live-replay-video {
+          flex: 2;
+          position: relative;
+          min-width: 320px;
+        }
+        .live-replay-video img,
+        .live-replay-video iframe {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border: none;
+          border-radius: 0;
+        }
+        .live-replay-info {
+          flex: 1;
+          padding: 20px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          background: #fafafa;
+        }
+        .live-replay-info h5 {
+          font-weight: 700;
+          font-size: 1.3rem;
+          margin-bottom: 0.2rem;
+        }
+        .live-replay-info .date {
+          color: #888;
+          font-size: 0.9rem;
+          margin-bottom: 1rem;
+        }
+        .live-replay-products {
+          flex-grow: 1;
+          overflow-y: auto;
+          padding-right: 5px;
+          border-top: 1px solid #ddd;
+          margin-top: 10px;
+        }
+        .live-replay-products select {
+          width: 100%;
+          padding: 6px 10px;
+          font-size: 0.95rem;
+        }
+.dropdown-menu li:hover {
+  background-color: #f1f1f1;
+}
+.dropdown-menu img {
+  object-fit: cover;
+}

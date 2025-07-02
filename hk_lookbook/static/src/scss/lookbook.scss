@@ -1,0 +1,318 @@
+// ===== SECTION LISTE DES THEMES =====
+.lookbook-section {
+  padding: 2rem 0 4rem;
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1.5rem;
+
+  .lookbook-theme {
+    background-color: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    padding: 2rem;
+    flex: 1 1 48%;
+    max-width: 48%;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.18);
+    }
+
+    .theme-cover {
+      text-align: center;
+      margin-bottom: 1.5rem;
+
+      img.theme-cover-img {
+        border-radius: 1rem;
+        width: 100%;
+        height: 280px;
+        object-fit: cover;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+        transition: transform 0.3s ease;
+
+        &:hover {
+          transform: scale(1.04);
+        }
+      }
+
+      h2 {
+        margin-top: 1.2rem;
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #222;
+      }
+
+      p.theme-description {
+        font-style: italic;
+        color: #555;
+        font-size: 1rem;
+        margin-top: 0.6rem;
+      }
+    }
+
+    .products-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.2rem;
+
+      .product-card {
+        max-width: 160px;
+
+        .card-img-top {
+          height: 160px;
+          width: 100%;
+          object-fit: cover;
+          border-radius: 10px;
+          transition: transform 0.3s ease;
+
+          &:hover {
+            transform: scale(1.07);
+          }
+        }
+
+        .card-body {
+          padding: 0.4rem 0.6rem;
+          font-size: 0.9rem;
+          text-align: center;
+
+          .card-title {
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 0.95rem;
+          }
+
+          p {
+            margin: 0;
+            color: #777;
+            font-size: 0.85rem;
+          }
+        }
+      }
+    }
+  }
+
+  .lookbook-theme:first-child {
+    flex-basis: 100%;
+    max-width: 100%;
+
+    .theme-cover img.theme-cover-img {
+      max-height: 500px;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+    }
+
+    p.theme-description {
+      font-size: 1.25rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .lookbook-theme {
+      flex-basis: 100% !important;
+      max-width: 100% !important;
+
+      .theme-cover img.theme-cover-img {
+        max-height: 400px;
+      }
+    }
+  }
+}
+
+// ===== SECTION GALLERIE PAR THEME =====
+.lookbook-gallery-section {
+  padding: 2rem 0 4rem;
+  max-width: 1140px;
+  margin: 0 auto;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+  h1 {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+
+  p.text-muted {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .media-card {
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    height: 100%;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+    }
+
+    img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      display: block;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .card-body {
+      padding: 1rem;
+
+      .card-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 0.75rem;
+      }
+
+      .media-description {
+        font-size: 0.95rem;
+        color: #666;
+        margin-bottom: 0.75rem;
+      }
+
+      .associated-products {
+        margin-top: 1rem;
+
+        .product-line {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0.6rem 0;
+          border-top: 1px solid #eee;
+
+          .product-info {
+            flex: 1;
+
+            .product-name {
+              font-weight: 600;
+              color: #222;
+              font-size: 0.95rem;
+            }
+
+            .product-desc {
+              font-size: 0.85rem;
+              color: #777;
+              font-style: italic;
+            }
+          }
+
+          .add-to-cart {
+            form {
+              margin-left: 1rem;
+
+              button {
+                background-color: #007bff;
+                color: white;
+                border: none;
+                padding: 0.4rem 0.7rem;
+                border-radius: 0.4rem;
+                font-size: 0.85rem;
+                cursor: pointer;
+                transition: background-color 0.2s;
+
+                &:hover {
+                  background-color: #0056b3;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .alert-warning {
+    font-size: 1.1rem;
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 1.8rem;
+    }
+
+    .media-card img {
+      height: 200px;
+    }
+
+    .product-line {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .add-to-cart {
+        margin-top: 0.5rem;
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+
+
+
+
+
+.gallery-card {
+  border-radius: 1rem;
+  overflow: hidden;
+  background: #fff;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+  }
+
+  .gallery-image-wrapper {
+    width: 100%;
+    height: 260px;
+    overflow: hidden;
+
+    .gallery-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: scale(1.04);
+      }
+    }
+  }
+
+  .gallery-info {
+    padding: 1.5rem;
+
+    .gallery-title {
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+
+    .gallery-description {
+      color: #555;
+      font-style: italic;
+    }
+  }
+}

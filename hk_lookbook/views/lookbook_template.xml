@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="website_look_books" name="Look Book - Liste des thèmes">
+    <t t-name="website.look_books">
+      <t t-call="website.layout">
+
+        <div class="container my-5 lookbook-section">
+          <t t-set="themes" t-value="request.env['look.book.theme'].sudo().search([('website_published','=', True)])"/>
+
+          <t t-foreach="themes" t-as="theme">
+              <div t-attf-class="lookbook-theme #{ 'first-theme' if idx == 0 else 'other-themes' } mb-5">
+              
+                <div class="theme-cover mx-auto text-center mb-3">
+                  <a t-att-href="'/look-book/theme?theme_id=%s' % theme.id" class="theme-link" style="text-decoration:none; color: inherit;">
+                    <img t-if="theme.image" 
+                       t-att-src="'/web/image/look.book.theme/%s/image' % theme.id"
+                       class="img-fluid theme-cover-img" 
+                       alt="Image de thème"/>
+                       <h2 class="mt-3"><t t-esc="theme.name"/></h2>
+                  </a>
+                  <p class="text-muted theme-description"><t t-esc="theme.description"/></p>
+                </div>
+            </div>
+          </t>
+        </div>
+
+      </t>
+    </t>
+  </template>
+       
+  <template id="website_look_book_theme_galleries" name="Galeries d’un Thème Look Book">
+    <t t-name="website.look_book_theme_galleries">
+      <t t-call="website.layout">
+
+        <t t-set="theme_id" t-value="request.params.get('theme_id')"/>
+        <t t-set="theme" t-value="request.env['look.book.theme'].sudo().browse(int(theme_id))"/>
+
+        <div class="container my-5">
+          <t t-if="theme">
+            <!-- En-tête du thème -->
+            <div class="text-center mb-5">
+              <h1><t t-esc="theme.name"/></h1>
+              <p class="text-muted"><t t-esc="theme.description"/></p>
+            </div>
+
+            <!-- Galeries liées -->
+            <div class="row">
+              <t t-foreach="theme.gallery_ids" t-as="gallery">
+                <div class="col-md-4 mb-4">
+                  <div class="card h-100 shadow-sm border-0">
+                    <img t-if="gallery.image"
+                         t-att-src="'/web/image/look.book.gallery/%s/image' % gallery.id"
+                         class="card-img-top img-fluid"
+                         alt="Image de galerie"/>
+                    <div class="card-body text-center">
+                        <a t-att-href="'/look-book/gallery?gallery_id=%s' % gallery.id"><h5 class="card-title"><t t-esc="gallery.name"/></h5></a>
+                      <p class="text-muted"><t t-esc="gallery.description"/></p>
+                    </div>
+                  </div>
+                </div>
+              </t>
+            </div>
+          </t>
+          <t t-if="not theme">
+            <p class="text-danger text-center">Thème introuvable ou ID invalide.</p>
+          </t>
+        </div>
+
+      </t>
+    </t>
+  </template>
+
+<template id="website_look_book_gallery_photos" name="Look Book Gallery Photos">
+
+  <t t-name="website.look_book_gallery_photos">
+    <t t-call="website.layout">
+      <div class="container lookbook-gallery-section my-5">
+
+        <!-- Récupération de la galerie -->
+        <t t-set="gallery_id" t-value="int(request.params.get('gallery_id', 0))"/>
+        <t t-set="gallery" t-value="request.env['look.book.gallery'].sudo().browse(gallery_id)"/>
+
+        <!-- Si galerie existe -->
+        <t t-if="gallery and gallery.exists()">
+          <div class="text-center mb-5">
+            <h1><t t-esc="gallery.name"/></h1>
+            <p class="text-muted"><t t-esc="gallery.description"/></p>
+          </div>
+
+          <!-- Affichage des médias -->
+          <div class="row g-5">
+            <t t-foreach="gallery.media_ids" t-as="media">
+              <div class="col-12 col-md-6">
+                <div class="gallery-card shadow-sm h-100">
+                  <div class="gallery-image-wrapper">
+                    <img t-if="media.image"
+                         t-att-src="'/web/image/look.book.media/%s/image' % media.id"
+                         class="gallery-image"
+                         alt="Image de galerie"/>
+                  </div>
+                  <div class="gallery-info p-3">
+                    <h3 class="gallery-title"><t t-esc="media.name"/></h3>
+                    <t t-if="media.description">
+                      <p class="gallery-description"><t t-esc="media.description"/></p>
+                    </t>
+
+                    <!-- Produits associés -->
+                    <t t-if="media.product_ids">
+                      <h6 class="mt-3 mb-2">Produits associés :</h6>
+                      <div class="row justify-content-start g-3">
+                        <t t-foreach="media.product_ids" t-as="prod">
+                          <t t-set="product" t-value="prod.product_id"/>
+                          <div class="product-card col-6 col-sm-4 col-md-3">
+                            <div class="card h-100 border-0 shadow-sm">
+                              
+                                <img t-if="product.image_1920"
+                                     t-att-src="'/web/image/product.template/%s/image_1920' % product.id"
+                                     class="card-img-top"
+                                     alt="Image produit"
+                                     style="height: 180px; object-fit: cover;"/>
+                             
+                              <div class="card-body text-center p-2">
+                                <a t-att-href="'/shop/product/%s' % slug(product)"><h6 class="card-title mb-1"><t t-esc="product.name"/></h6></a>
+                                <p class="text-muted mb-0"><t t-esc="product.list_price"/> €</p>
+                              </div>
+                            </div>
+                          </div>
+                        </t>
+                      </div>
+                    </t>
+                  </div>
+                </div>
+              </div>
+            </t>
+          </div>
+        </t>
+
+        <!-- Si galerie non trouvée -->
+        <t t-if="not gallery or not gallery.exists()">
+          <div class="alert alert-warning text-center mt-5">
+            Aucune galerie trouvée.
+          </div>
+        </t>
+      </div>
+    </t>
+  </t>
+</template>
+
+
+  <record id="look_book_gallery_photos_page" model="website.page">
+    <field name="name">Photos d'une Galerie</field>
+    <field name="url">/look-book/gallery</field>
+    <field name="website_published">True</field>
+    <field name="view_id" ref="website_look_book_gallery_photos"/>
+  </record>
+
+  <record id="look_book_theme_galleries_page" model="website.page">
+    <field name="name">Look Book - Galeries par thème</field>
+    <field name="url">/look-book/theme</field>
+    <field name="website_published">True</field>
+    <field name="view_id" ref="hk_lookbook.website_look_book_theme_galleries"/>
+  </record>
+
+  <record id="look_books_page" model="website.page">
+    <field name="name">Look Book - Thèmes</field>
+    <field name="url">/look-book</field>
+    <field name="website_published">True</field>
+    <field name="view_id" ref="website_look_books"/>
+  </record>
+</odoo>

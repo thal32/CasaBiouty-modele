@@ -1,0 +1,15 @@
+<odoo>
+    <menuitem id="menu_clothing_ai_root" name="comparer avec IA" sequence="10"/>
+
+    <record id="action_image_clothing_matcher" model="ir.actions.act_window">
+        <field name="name">Comparaisons</field>
+        <field name="res_model">image.yolov8.image.matcher</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_image_clothing_matcher_main" 
+              name="Comparaisons" 
+              parent="menu_clothing_ai_root" 
+              action="action_image_clothing_matcher" 
+              sequence="20"/>
+</odoo>

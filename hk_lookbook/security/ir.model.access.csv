@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_look_book_theme,access_look_book_theme,model_look_book_theme,base.group_user,1,1,1,1
+access_look_book_gallery,access_look_book_gallery,model_look_book_gallery,base.group_user,1,1,1,1
+access_look_book_media,access_look_book_media,model_look_book_media,base.group_user,1,1,1,1
+access_look_book_media_product,access_look_book_media_product,model_look_book_media_product,base.group_user,1,1,1,1
