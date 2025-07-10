@@ -304,7 +304,7 @@
                 <a t-att-href="related.website_url" class="text-decoration-none">
                   <img t-att-src="'/web/image/product.template/%s/image_1920' % related.id" class="img img-fluid mb-2" style="max-height: 200px; object-fit: contain;"/>
                   <p class="fw-bold mb-1"><t t-esc="related.name"/></p>
-                  <p class="text-muted"><t t-esc="related.list_price"/> €</p>
+                  <p class="text-muted"><t t-esc="related.list_price"/> Ar</p>
                 </a>
               </div>
             </t>
@@ -313,60 +313,70 @@
       </t>
 
 
-<t t-set="product_color" t-value="None"/>
-<t t-set="product_brand" t-value="None"/>
-
-<!-- Récupération couleur et marque -->
-<t t-foreach="product.valid_product_template_attribute_line_ids" t-as="line">
-  <t t-set="color_attr" t-value="'couleur'"/>
-  <t t-set="brand_attr" t-value="'marque'"/>
-
-  <!-- Couleur -->
-  <t t-if="line.attribute_id.name.lower() == color_attr">
-    <t t-set="product_color" t-value="line.product_template_value_ids[0].name if line.product_template_value_ids else None"/>
+<!-- 🏷️ Marque (nom) -->
+<t t-set="brand_name" t-value="''"/>
+<t t-set="color_name" t-value="''"/>
+<t t-foreach="product.product_variant_ids[0].product_template_attribute_value_ids" t-as="val">
+  <t t-if="val.attribute_id.name.lower() == 'marque'">
+    <t t-set="brand_name" t-value="val.name"/>
   </t>
-
-  <!-- Marque -->
-  <t t-if="line.attribute_id.name.lower() == brand_attr">
-    <t t-set="product_brand" t-value="line.product_template_value_ids[0].name if line.product_template_value_ids else None"/>
+  <t t-if="val.attribute_id.name.lower() == 'couleur'">
+    <t t-set="color_name" t-value="val.name"/>
   </t>
 </t>
 
-<!-- Suggérer les produits de même couleur ou marque -->
-<t t-set="suggested_products"
-   t-value="request.env['product.template'].search([
-     '|',
-     ('valid_product_template_attribute_line_ids.product_template_value_ids.name', '=', product_color),
-     ('valid_product_template_attribute_line_ids.product_template_value_ids.name', '=', product_brand),
-     ('id', '!=', product.id),
-     ('website_published', '=', True)
-   ], limit=4)"/>
+<!-- 📂 Catégories Vêtements -->
+<t t-set="root_vetement_category"
+   t-value="request.env['product.public.category'].search([('name', 'ilike', 'Vêtement')], limit=1)"/>
+<t t-set="vetement_categories"
+   t-value="root_vetement_category.mapped('child_id').ids + [root_vetement_category.id]"/>
 
-<!-- Affichage uniquement si des produits sont trouvés -->
-<t t-if="suggested_products">
-  <div class="mt-5">
-    <h4 class="mb-4">Accessoires assortis</h4>
-    <div class="row">
-      <t t-foreach="suggested_products" t-as="suggested">
-        <div class="col-md-3 col-sm-6 mb-4 text-center">
-          <a t-att-href="suggested.website_url" class="text-decoration-none">
-            <img t-att-src="'/web/image/product.template/%s/image_1920' % suggested.id"
-                 class="img img-fluid mb-2"
-                 style="max-height: 200px; object-fit: contain;"/>
-            <p class="fw-bold mb-1">
-              <t t-esc="suggested.name"/>
-            </p>
-            <p class="text-muted">
-              <t t-esc="suggested.list_price"/> €
-            </p>
-          </a>
-        </div>
-      </t>
+<!-- 📂 Catégories Accessoire / Chaussure -->
+<t t-set="root_accessory_categories"
+   t-value="request.env['product.public.category'].search(['|', ('name', 'ilike', 'Chaussure'), ('name', 'ilike', 'Accessoire')])"/>
+<t t-set="accessory_categories"
+   t-value="root_accessory_categories.mapped('child_id').ids + root_accessory_categories.ids"/>
+
+<!-- 📌 Détection de la catégorie du produit courant -->
+<t t-set="product_category_ids" t-value="product.public_categ_ids.ids"/>
+<t t-set="is_vetement" t-value="any(c in vetement_categories for c in product_category_ids)"/>
+<t t-set="is_accessory" t-value="any(c in accessory_categories for c in product_category_ids)"/>
+
+<!-- 🔍 Recherche des produits selon le contexte -->
+<t t-if="(brand_name or color_name) and (is_vetement or is_accessory)">
+  <t t-set="target_categories"
+     t-value="is_vetement and accessory_categories or (is_accessory and vetement_categories)"/>
+
+  <t t-set="suggested_products"
+     t-value="request.env['product.template'].search([
+       '|',
+       ('product_variant_ids.product_template_attribute_value_ids.name', '=', brand_name),
+       ('product_variant_ids.product_template_attribute_value_ids.name', '=', color_name),
+       ('website_published', '=', True),
+       ('id', '!=', product.id),
+       ('public_categ_ids.id', 'in', target_categories)
+     ])"/>
+
+  <!-- ✅ Affichage si produits trouvés -->
+  <t t-if="suggested_products">
+    <div class="mt-5">
+      <h4 class="mb-4">Améliorez votre style avec nos suggestions :</h4>
+      <div class="row">
+        <t t-foreach="suggested_products" t-as="related">
+          <div class="col-md-3 col-sm-6 mb-4 text-center">
+            <a t-att-href="related.website_url" class="text-decoration-none">
+              <img t-att-src="'/web/image/product.template/%s/image_1920' % related.id"
+                   class="img img-fluid mb-2"
+                   style="max-height: 200px; object-fit: contain;" />
+              <p class="fw-bold mb-1"><t t-esc="related.name"/></p>
+              <p class="text-muted"><t t-esc="related.list_price"/> Ar</p>
+            </a>
+          </div>
+        </t>
+      </div>
     </div>
-  </div>
+  </t>
 </t>
-
-
 
 
     </xpath>
