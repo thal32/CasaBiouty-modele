@@ -1,0 +1,67 @@
+<odoo>
+  <template id="custom_search_result" inherit_id="website.list_hybrid">
+    <xpath expr="//div[@id='wrap']" position="inside">
+      <main class="container mt-4">
+        <div class="row">
+
+          <!-- Filtres -->
+          <div class="col-lg-3">
+            <form method="get" action="/hybride">
+              <h5 class="mb-3">Filtres</h5>
+              <t t-foreach="all_attributes" t-as="attrib">
+                <div class="mb-3">
+                  <strong><t t-esc="attrib.name" /></strong>
+                  <t t-foreach="attrib.value_ids" t-as="val">
+                    <div class="form-check">
+                      <input class="form-check-input"
+                             type="checkbox"
+                             name="attrib"
+                             t-att-value="val.id"
+                             t-att-checked="'checked' if val.id in selected_ids else None"/>
+                      <label class="form-check-label" t-esc="val.name"/>
+                    </div>
+                  </t>
+                </div>
+              </t>
+              <button type="submit" class="btn btn-primary mt-2">Appliquer</button>
+            </form>
+          </div>
+
+          <!-- Produits -->
+          <div class="col-lg-9">
+            <div class="row">
+              <t t-if="products">
+                <t t-foreach="products" t-as="product">
+                  <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                      <img t-att-src="'/web/image/product.template/%d/image_1920' % product.id"
+                           class="card-img-top"
+                           style="height: 200px; object-fit: cover;" />
+                      <div class="card-body">
+                        <h6 class="card-title" t-esc="product.name" />
+                        <t t-foreach="product.product_variant_ids" t-as="variant">
+                          <p class="mb-0">
+                            <t t-foreach="variant.product_template_attribute_value_ids" t-as="attr_val">
+                              <span class="badge bg-secondary me-1">
+                                <t t-esc="attr_val.name" />
+                              </span>
+                            </t>
+                          </p>
+                        </t>
+                      </div>
+                    </div>
+                  </div>
+                </t>
+              </t>
+              <t t-if="not products">
+                <div class="col-12">
+                  <p>Aucun produit trouvé pour les filtres sélectionnés.</p>
+                </div>
+              </t>
+            </div>
+          </div>
+        </div>
+      </main>
+    </xpath>
+  </template>
+</odoo>

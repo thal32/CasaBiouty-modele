@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <template id="template_header_inherit_beta" inherit_id="website.template_header_default" name="Header custom"
+            active="True">
+    <xpath expr="//t[@t-call='website.navbar']" position="replace">
+      <t t-call="website.navbar">
+
+
+        <t t-set="_navbar_classes" t-valuef="d-none d-lg-block shadow-sm"/>
+        <div class="container">
+          <div class="top-content">
+            <div class="leftContent">
+              <t t-call="website.placeholder_header_brand">
+                <t t-set="_link_class" t-valuef="me-4"/>
+              </t>
+            </div>
+
+
+
+            <div class="rightContent">
+              <div class="header-info">
+                <div class="s_social_media text-center o_not_editable" data-snippet="s_social_media"
+                     data-name="Réseaux sociaux">
+                  <a target="_blank" href="https://www.facebook.com/christinaleongpage" class="s_social_media_facebook">
+                    <i class="fa shadow-sm fa-facebook"/>
+                  </a>
+                  <a target="_blank" href="https://www.instagram.com/christinaleong_rakotoniaina" class="s_social_media_instagram">
+                    <i class="fa shadow-sm fa-instagram"/>
+                  </a>
+                  <a target="_blank" href="https://www.tiktok.com/@christinaleong_rak" class="s_social_media_tiktok">
+                    <i class="fa shadow-sm fa-tiktok"/>
+                  </a>
+                  <a target="_blank" href="https://www.youtube.com/@christinaleong4995" class="s_social_media_youtube">
+                    <i class="fa shadow-sm fa-youtube"/>
+                  </a>
+                </div>
+                <p>
+                  <a href="tel:0341800709">+261341800709</a>
+                  <a href="mailto:alaiko@casabiouty.shop">alaiko@casabiouty.shop</a>
+                </p>
+              </div>
+
+
+              <div id="o_main_nav" class="o_main_nav container">
+                <t t-call="website.navbar_nav">
+                  <t t-set="_nav_class" t-valuef="me-auto"/>
+                  <t t-foreach="website.menu_id.child_id" t-as="submenu">
+                    <t t-call="website.submenu">
+                      <t t-set="item_class" t-valuef="nav-item"/>
+                      <t t-set="link_class" t-valuef="nav-link"/>
+                    </t>
+                  </t>
+                </t>
+
+
+
+
+                <ul class="navbar-nav align-items-center gap-2 flex-shrink-0 justify-content-end ps-3">
+                  <t t-call="portal.placeholder_user_sign_in">
+                    <t t-set="_link_class" t-valuef="btn btn-outline-secondary"/>
+                  </t>
+
+
+                  <ul class="navbar-nav align-items-center gap-2 flex-shrink-0 justify-content-end ps-3 user_top">
+                    <t t-call="portal.user_dropdown">
+                      <t t-set="_icon" t-value="true"/>
+                      <t t-set="_icon_class" t-valuef="fa-stack"/>
+                      <t t-set="_item_class" t-valuef="dropdown"/>
+                      <t t-set="_link_class"
+                         t-valuef="d-flex align-items-center border-0 fw-bold text-reset"/>
+                      <t t-set="_icon_wrap_class" t-value="'position-relative me-2 p-2  border bg-o-color-3'"/>
+                      <t t-set="_dropdown_menu_class" t-valuef="dropdown-menu-end"/>
+                    </t>
+                  </ul>
+                  <t t-call="website_sale.header_cart_link">
+                    <t t-set="_icon" t-value="True"/>
+                    <t t-set="_link_class"
+                       t-value="'o_navlink_background btn position-relative  p-1 text-center text-reset'"/>
+                    <t t-set="_badge_class" t-value="'position-absolute top-0 end-0 mt-n1 me-n1 rounded-pill'"/>
+                  </t>
+                </ul>
+                <t t-call="website_sale_wishlist.header_wishlist_link">
+                  <t t-set="_icon" t-value="True"/>
+                  <t t-set="_link_class"
+                     t-value="'o_navlink_background_hover btn position-relative rounded-circle border-0 p-1 text-reset'"/>
+                  <t t-set="_badge_class" t-value="'position-absolute top-0 end-0 mt-n1 me-n1 rounded-pill'"/>
+                </t>
+              </div>
+            </div>
+          </div>
+        </div>
+      </t>
+    </xpath>
+  </template>
+
+  <template id="template_footer_inherit_beta" inherit_id="website.footer_custom" name="Footer Contact"
+            active="True">
+    <xpath expr="//div[@id='footer']" position="replace">
+      <div id="footer" class="oe_structure oe_structure_solo custom_footer o_cc4 " t-ignore="true" t-if="not no_footer">
+        <div id="footer" class="custom_footer oe_structure oe_structure_solo" t-ignore="true" t-if="not no_footer">
+          <section class="s_text_block pb16 pt32" data-snippet="s_text_block" data-name="Text"
+                   style="background-image: none;">
+            <a class="whatsapp_link" href="https://wa.me/0383721227" target="_blank">
+              <img src="/hk_myprod/static/src/img/whatsapp.png"/>
+            </a>
+            <div class="container">
+              <div class="row pt16 pb16">
+                <div class="o_colored_level col-lg-4">
+                  <h5 class="mb-3 text-center">
+                    <img height="150" src="/hk_myprod/static/src/img/logo2.png" alt=""
+                         class="img img-fluid o_we_custom_image"/>
+                    <br/>
+                  </h5>
+                  <div class="s_social_media text-center o_not_editable" data-snippet="s_social_media"
+                       data-name="Réseaux sociaux">
+                    <a target="_blank" href="https://www.facebook.com/christinaleongpage" class="s_social_media_facebook">
+                      <i class="fa shadow-sm fa-facebook"/>
+                    </a>
+                    <a target="_blank" href="https://www.instagram.com/christinaleong_rakotoniaina" class="s_social_media_instagram">
+                      <i class="fa shadow-sm fa-instagram"/>
+                    </a>
+                    <a target="_blank" href="https://www.tiktok.com/@christinaleong_rak" class="s_social_media_tiktok">
+                      <i class="fa shadow-sm fa-tiktok"/>
+                    </a>
+                    <a target="_blank" href="https://www.youtube.com/@christinaleong4995" class="s_social_media_youtube">
+                      <i class="fa shadow-sm fa-youtube"/>
+                    </a>
+                  </div>
+                </div>
+                <div class="o_colored_level col-lg-2">
+                  <p class="mb-3">
+                    <strong>
+                      LIENS UTILES
+                    </strong>
+                    <br/>
+                  </p>
+                  <ul class="list-unstyled">
+                    <li>
+                      <a href="/">ACCUEIL</a>
+                    </li>
+                    <li>
+                      <a href="#">CASA &amp; BIOUTY</a>
+                    </li>
+                    <li>
+                      <a href="#">LIVE SHOPPING</a>
+                    </li>
+                    <li>
+                      <a href="#">CHRISTINAH LEONG</a>
+                    </li>
+                    <li>
+                      <a href="/contactus">NOUS CONTACTER</a>
+                    </li>
+                    <li>
+                      <a href="#">CGV</a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="o_colored_level col-lg-2">
+                  <p class="mb-3">
+                    <strong>
+                      NOS PRODUITS
+                    </strong>
+                    <br/>
+                  </p>
+                  <ul class="list-unstyled">
+                    <li>
+                      <a href="#">MODE</a>
+                    </li>
+                    <li>
+                      <a href="#">PROMOTION</a>
+                    </li>
+                    <li>
+                      <a href="/shop">NOUVEAUTE</a>
+                    </li>
+                    <li>
+                      <a href="#">SHOOT PRODUITS</a>
+                    </li>
+                  </ul>
+                </div>
+                <div id="connect" class="o_colored_level col-lg-4 ">
+                  <p class="mb-3">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad doloribus et, facere inventore ipsum
+                    iure similique. Corporis eaque illum laboriosam, minus nam quis.
+                  </p>
+                  <p>
+                    <a href="mailto:info@hetsikaketrika.com">info@hetsikaketrika.com</a>
+                    <a href="tel:0341800709" class="mx-3">+261341800709</a>
+                  </p>
+                  <section class="s_map pt120 pb120" data-map-type="m" data-map-zoom="12" data-snippet="s_map"
+                           data-map-address="tananarive casa biouty " data-name="Carte">
+                    <div class="map_container o_not_editable">
+                      <div class="css_non_editable_mode_hidden">
+                      </div>
+                      <iframe class="s_map_embedded o_not_editable" width="100%" height="100%" frameborder="0"
+                              scrolling="no" marginheight="0" marginwidth="0" aria-label="Carte"
+                              src="https://maps.google.com/maps?q=tananarive%20casa%20biouty%20&amp;t=m&amp;z=12&amp;ie=UTF8&amp;iwloc=&amp;output=embed"/>
+                      <div class="s_map_color_filter"/>
+                    </div>
+                  </section>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </xpath>
+  </template>
+
+  <template id="template_copyright_inherit" inherit_id="web.frontend_layout">
+    <xpath expr="//div[hasclass('o_footer_copyright')]" position="replace">
+      <div class="o_colored_level o_cc4 " data-name="Copyright">
+        <div class="container py-3">
+          <div class="row">
+            <div class="text-center">
+              <span class="o_footer_copyright_name me-2">
+                Fitiagape Vision © 2025 – Tous droits réservés
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </xpath>
+  </template>
+
+</odoo>
